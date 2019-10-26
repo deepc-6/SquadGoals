@@ -4,7 +4,8 @@
   "description": "An application to manage CRUD operations for team management",
   "main": "server.js",
   "scripts": {
-    "dev": "nodemon -r dotenv/config server.js"
+    "test": "cross-env NODE_ENV=test jest --runInBand",
+    "dev": "cross-env NODE_ENV=development nodemon -r dotenv/config server.js"
   },
   "author": "Deep",
   "license": "MIT",
@@ -15,9 +16,21 @@
     "mongoose": "^5.7.7"
   },
   "devDependencies": {
+    "cross-env": "^6.0.3",
     "eslint": "^6.6.0",
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-plugin-import": "^2.18.2",
-    "nodemon": "^1.19.4"
+    "jest": "^24.9.0",
+    "nodemon": "^1.19.4",
+    "supertest": "^4.0.2"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "setupFiles": [
+      "dotenv/config"
+    ],
+    "coveragePathIgnorePatterns": [
+      "/node_modules/"
+    ]
   }
 }
