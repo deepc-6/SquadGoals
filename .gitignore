@@ -1,3 +1,4 @@
 .vscode
 src/server/node_modules
 src/server/yarn.lock
+src/server/.env
