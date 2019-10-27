@@ -22,5 +22,8 @@ module.exports = {
     'consistent-return': 'off',
     'no-restricted-syntax': 'off',
     'no-await-in-loop': 'off',
+    'no-use-before-define': 'off',
+    'func-names': 'off',
+    'space-before-function-paren': 'off',
   },
 };

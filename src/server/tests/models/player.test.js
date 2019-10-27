@@ -30,7 +30,7 @@ describe('Player Model Test', () => {
   });
 
   // should not be able to add in any field that isn't defined in the schema
-  it('should insert player successfully, but the field not defined in schema should not be inserted', async (done) => {
+  it('should insert player successfully, but the field not defined in schema should not be inserted', async () => {
     const userWithInvalidField = new Player({
       name: 'player2',
       age: 20,
@@ -40,7 +40,6 @@ describe('Player Model Test', () => {
     const savedUserWithInvalidField = await userWithInvalidField.save();
     expect(savedUserWithInvalidField._id).toBeDefined();
     expect(savedUserWithInvalidField.gender).toBeUndefined();
-    done();
   });
 
   // should not be able to add a player without all the required fields defined in the schema

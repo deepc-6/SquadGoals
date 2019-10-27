@@ -1,11 +1,12 @@
 const { ObjectID } = require('mongodb');
 const express = require('express');
 const Player = require('../models/player');
+const authenticate = require('../middleware/auth');
 
 const router = new express.Router();
 
 // create new players
-router.post('/players', async (req, res) => {
+router.post('/players', authenticate, async (req, res) => {
   const player = new Player({ ...req.body });
   try {
     await player.save();
@@ -16,7 +17,7 @@ router.post('/players', async (req, res) => {
 });
 
 // get all players
-router.get('/players', async (req, res) => {
+router.get('/players', authenticate, async (req, res) => {
   try {
     const players = await Player.find({});
     res.send(players);
@@ -26,7 +27,7 @@ router.get('/players', async (req, res) => {
 });
 
 // get one player
-router.get('/players/:id', async (req, res) => {
+router.get('/players/:id', authenticate, async (req, res) => {
   const _id = req.params.id;
   if (!ObjectID.isValid(_id)) {
     return res.status(404).send();
@@ -43,7 +44,7 @@ router.get('/players/:id', async (req, res) => {
 });
 
 // update a player
-router.patch('/players/:id', async (req, res) => {
+router.patch('/players/:id', authenticate, async (req, res) => {
   const _id = req.params.id;
   const updates = Object.keys(req.body);
   const allowedUpdates = ['name', 'age', 'position'];
@@ -77,7 +78,7 @@ router.patch('/players/:id', async (req, res) => {
 });
 
 // delete a player
-router.delete('/players/:id', async (req, res) => {
+router.delete('/players/:id', authenticate, async (req, res) => {
   const _id = req.params.id;
   if (!ObjectID.isValid(_id)) {
     return res.status(404).send();

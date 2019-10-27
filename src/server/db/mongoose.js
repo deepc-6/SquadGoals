@@ -5,16 +5,15 @@ const config = require('../config/config');
 mongoose.Promise = global.Promise;
 
 // connect to database
-mongoose
-  .connect(config.MONGODB_URI, {
-    useCreateIndex: true,
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useFindAndModify: false,
-  })
-  .then(() => {
-    console.log('connected to database');
-  })
-  .catch(() => {
-    console.log('connection to database failed');
-  });
+if (process.env.NODE_ENV !== 'test') {
+  mongoose
+    .connect(config.MONGODB_URI, {
+      useCreateIndex: true,
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      useFindAndModify: false,
+    })
+    .catch(() => {
+      console.log('connection to database failed');
+    });
+}
