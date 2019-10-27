@@ -14,28 +14,29 @@ describe('Player Routes Test', () => {
   let _id;
   let playerId;
 
-  // create a manager in the database before all tests
-  beforeAll(async (done) => {
+  // create a manager in the database
+  it('should create new manager', async (done) => {
     await request(app)
-      .post('/users')
+      .post('/manager')
       .send({
         name: 'manager5',
         email: 'manager5@example.com',
         password: 'manager5Password',
-      });
+      })
+      .then((response) => expect(response.statusCode).toBe(201));
     done();
   });
 
   // login with valid manager credentials
   it('should login', async (done) => {
     await request(app)
-      .post('/users/login')
+      .post('/manager/login')
       .send({
         email: 'manager5@example.com',
         password: 'manager5Password',
       })
       .then((response) => {
-        _id = response.body.user._id;
+        _id = response.body._id;
         token = response.body.token;
         expect(response.statusCode).toBe(200);
       });
@@ -45,7 +46,7 @@ describe('Player Routes Test', () => {
   // logout as manager
   it('should logout', async (done) => {
     await request(app)
-      .post('/users/logout')
+      .get('/manager/logout')
       .set('Authorization', `Bearer ${token}`)
       .send({ _id })
       .then((response) => expect(response.statusCode).toBe(200));
@@ -78,13 +79,13 @@ describe('Player Routes Test', () => {
   // login again to check player CRUD functionality
   it('should login', async (done) => {
     await request(app)
-      .post('/users/login')
+      .post('/manager/login')
       .send({
         email: 'manager5@example.com',
         password: 'manager5Password',
       })
       .then((response) => {
-        _id = response.body.user._id;
+        _id = response.body._id;
         token = response.body.token;
         expect(response.statusCode).toBe(200);
       });

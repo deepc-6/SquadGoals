@@ -54,7 +54,7 @@ ManagerSchema.statics.checkValidCredentials = async (email, password) => {
   }
   const isMatch = await bcrypt.compare(password, user.password);
   if (!isMatch) {
-    throw new Error('Password did not match');
+    throw new Error('Incorrect password');
   }
   return user;
 };

@@ -6,9 +6,13 @@ const authenticate = require('../middleware/auth');
 const router = new express.Router();
 
 // create a new manager
-router.post('/users', async (req, res) => {
+router.post('/manager', async (req, res) => {
   const user = new Manager({ ...req.body });
   try {
+    const existingUser = await Manager.findOne({ email: req.body.email });
+    if (existingUser) {
+      return res.status(409).send();
+    }
     const token = await user.newAuthToken();
     res.status(201).send({ user, token });
   } catch (error) {
@@ -17,22 +21,21 @@ router.post('/users', async (req, res) => {
 });
 
 // login as manager
-router.post('/users/login', async (req, res) => {
+router.post('/manager/login', async (req, res) => {
   try {
     const user = await Manager.checkValidCredentials(
       req.body.email,
       req.body.password,
     );
     const token = await user.newAuthToken();
-    res.send({ user, token });
+    res.send({ _id: user._id, token });
   } catch (error) {
-    console.log('error', error);
     res.status(400).send();
   }
 });
 
 // logout as manager
-router.post('/users/logout', authenticate, async (req, res) => {
+router.get('/manager/logout', authenticate, async (req, res) => {
   try {
     req.user.tokens = req.user.tokens.filter(
       (token) => token.token !== req.token,
@@ -45,7 +48,7 @@ router.post('/users/logout', authenticate, async (req, res) => {
 });
 
 // view manager details
-router.get('/users/:id', authenticate, async (req, res) => {
+router.get('/manager/:id', authenticate, async (req, res) => {
   const _id = req.params.id;
   if (!ObjectID.isValid(_id)) {
     return res.status(404).send();
@@ -62,7 +65,7 @@ router.get('/users/:id', authenticate, async (req, res) => {
 });
 
 // update manager details
-router.patch('/users/:id', authenticate, async (req, res) => {
+router.patch('/manager/:id', authenticate, async (req, res) => {
   const _id = req.params.id;
   const updates = Object.keys(req.body);
   const allowedUpdates = ['name', 'email', 'password'];
@@ -71,7 +74,7 @@ router.patch('/users/:id', authenticate, async (req, res) => {
   );
 
   if (!isValidOperation) {
-    res.status(400).send({ error: 'Invalid request' });
+    res.status(400).send({ error: 'Bad request' });
   }
 
   if (!ObjectID.isValid(_id)) {
@@ -99,7 +102,7 @@ router.patch('/users/:id', authenticate, async (req, res) => {
 });
 
 // delete manager account
-router.delete('/users/:id', authenticate, async (req, res) => {
+router.delete('/manager/:id', authenticate, async (req, res) => {
   const _id = req.params.id;
   if (!ObjectID.isValid(_id)) {
     return res.status(404).send();
@@ -111,7 +114,7 @@ router.delete('/users/:id', authenticate, async (req, res) => {
       return res.status(404).send();
     }
     await deleteUser.remove();
-    res.send(deleteUser);
+    res.send();
   } catch (error) {
     res.status(500).send();
   }

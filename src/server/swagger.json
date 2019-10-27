@@ -1,0 +1,359 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "SquadGoals API",
+    "description": "The API behind the SquadGoals application",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "tags": [
+    {
+      "name": "manager",
+      "description": "Operations on manager"
+    },
+    {
+      "name": "players",
+      "description": "Operations on players"
+    }
+  ],
+  "paths": {
+    "/manager": {
+      "post": {
+        "tags": ["manager"],
+        "summary": "Creates a new manager",
+        "description": "",
+        "requestBody": {
+          "$ref": "#/components/requestBodies/managerCreate"
+        },
+        "responses": {
+          "201": {
+            "description": "Create success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/managerCreateResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "409": {
+            "description": "Conflict"
+          }
+        }
+      }
+    },
+    "/manager/login": {
+      "post": {
+        "tags": ["manager"],
+        "summary": "Manager login",
+        "description": "",
+        "requestBody": {
+          "$ref": "#/components/requestBodies/managerLogin"
+        },
+        "responses": {
+          "200": {
+            "description": "Login success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/managerLoginResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      }
+    },
+    "/manager/logout": {
+      "get": {
+        "tags": ["manager"],
+        "summary": "Manager logout",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "Logout success"
+          }
+        }
+      }
+    },
+    "/manager/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "id of the manager",
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "get": {
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "tags": ["manager"],
+        "summary": "Get manager",
+        "description": "Returns the manager with the given id",
+        "responses": {
+          "200": {
+            "description": "Get success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/managerGetAndPatchResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      },
+      "patch": {
+        "tags": ["manager"],
+        "summary": "Update manager",
+        "description": "Updates the manager with the given id",
+        "requestBody": {
+          "$ref": "#/components/requestBodies/managerPatch"
+        },
+        "responses": {
+          "200": {
+            "description": "Manager update success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/managerGetAndPatchResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Manager not found"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["manager"],
+        "summary": "Delete manager",
+        "description": "Deletes the manager with the given id",
+        "responses": {
+          "200": {
+            "description": "Manager deletion success"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Manager not found"
+          }
+        }
+      }
+    }
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000/"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    },
+    "requestBodies": {
+      "managerCreate": {
+        "content": {
+          "application/x-www-form-urlencoded": {
+            "schema": {
+              "$ref": "#/components/schemas/managerCreate"
+            }
+          }
+        }
+      },
+      "managerCreateResponse": {
+        "content": {
+          "application/x-www-form-urlencoded": {
+            "schema": {
+              "$ref": "#/components/schemas/managerCreateResponse"
+            }
+          }
+        }
+      },
+      "managerLogin": {
+        "content": {
+          "application/x-www-form-urlencoded": {
+            "schema": {
+              "$ref": "#/components/schemas/managerLogin"
+            }
+          }
+        }
+      },
+      "managerLoginResponse": {
+        "content": {
+          "application/x-www-form-urlencoded": {
+            "schema": {
+              "$ref": "#/components/schemas/managerLoginResponse"
+            }
+          }
+        }
+      },
+      "managerPatch": {
+        "content": {
+          "application/x-www-form-urlencoded": {
+            "schema": {
+              "$ref": "#/components/schemas/managerPatch"
+            }
+          }
+        }
+      },
+      "managerGetAndPatchResponse": {
+        "content": {
+          "application/x-www-form-urlencoded": {
+            "schema": {
+              "$ref": "#/components/schemas/managerGetAndPatchResponse"
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "managerCreate": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "uniqueItems": true
+          },
+          "password": {
+            "type": "string"
+          }
+        },
+        "required": ["name", "email", "password"]
+      },
+      "managerCreateResponse": {
+        "type": "object",
+        "properties": {
+          "user": {
+            "type": "object",
+            "properties": {
+              "_id": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "email": {
+                "type": "string"
+              },
+              "createdAt": {
+                "type": "string"
+              },
+              "updatedAt": {
+                "type": "string"
+              },
+              "__v": {
+                "type": "integer"
+              }
+            }
+          },
+          "token": {
+            "type": "string"
+          }
+        }
+      },
+      "managerLogin": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "format": "email",
+            "uniqueItems": true
+          },
+          "password": {
+            "type": "string"
+          }
+        },
+        "required": ["email", "password"]
+      },
+      "managerLoginResponse": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string"
+          },
+          "token": {
+            "type": "string"
+          }
+        }
+      },
+      "managerPatch": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "uniqueItems": true
+          },
+          "password": {
+            "type": "string"
+          }
+        }
+      },
+      "managerGetAndPatchResponse": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "string"
+          },
+          "updatedAt": {
+            "type": "string"
+          },
+          "__v": {
+            "type": "integer"
+          }
+        }
+      }
+    }
+  }
+}
