@@ -67,7 +67,9 @@ router.patch('/players/:id', authenticate, async (req, res) => {
     }
 
     updates.forEach((update) => {
-      player[update] = req.body[update];
+      if (req.body[update]) {
+        player[update] = req.body[update];
+      }
     });
     await player.save();
 
@@ -88,7 +90,7 @@ router.delete('/players/:id', authenticate, async (req, res) => {
     if (!deletePlayer) {
       return res.status(404).send();
     }
-    res.send(deletePlayer);
+    res.send();
   } catch (error) {
     res.status(500).send();
   }

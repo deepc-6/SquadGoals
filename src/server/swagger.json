@@ -129,6 +129,11 @@
         }
       },
       "patch": {
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "tags": ["manager"],
         "summary": "Update manager",
         "description": "Updates the manager with the given id",
@@ -155,6 +160,11 @@
         }
       },
       "delete": {
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "tags": ["manager"],
         "summary": "Delete manager",
         "description": "Deletes the manager with the given id",
@@ -167,6 +177,157 @@
           },
           "404": {
             "description": "Manager not found"
+          }
+        }
+      }
+    },
+    "/players": {
+      "post": {
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "tags": ["players"],
+        "summary": "Creates a new player",
+        "description": "",
+        "requestBody": {
+          "$ref": "#/components/requestBodies/playerRequest"
+        },
+        "responses": {
+          "201": {
+            "description": "Create success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/playerResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "409": {
+            "description": "Conflict"
+          }
+        }
+      },
+      "get": {
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "tags": ["players"],
+        "summary": "Get all players",
+        "description": "Returns all players",
+        "responses": {
+          "200": {
+            "description": "Get success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/playerGetAllResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          }
+        }
+      }
+    },
+    "/players/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "id of the player",
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "get": {
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "tags": ["players"],
+        "summary": "Get one player",
+        "description": "Returns the player with the given id",
+        "responses": {
+          "200": {
+            "description": "Get success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/playerResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      },
+      "patch": {
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "tags": ["players"],
+        "summary": "Updates a player",
+        "description": "Updates the player with the given id",
+        "requestBody": {
+          "$ref": "#/components/requestBodies/playerRequest"
+        },
+        "responses": {
+          "200": {
+            "description": "Player update success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/playerResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Player not found"
+          }
+        }
+      },
+      "delete": {
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "tags": ["players"],
+        "summary": "Delete a player",
+        "description": "Deletes the player with the given id",
+        "responses": {
+          "200": {
+            "description": "Player deletion success"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Player not found"
           }
         }
       }
@@ -236,6 +397,33 @@
           "application/x-www-form-urlencoded": {
             "schema": {
               "$ref": "#/components/schemas/managerGetAndPatchResponse"
+            }
+          }
+        }
+      },
+      "playerRequest": {
+        "content": {
+          "application/x-www-form-urlencoded": {
+            "schema": {
+              "$ref": "#/components/schemas/playerRequest"
+            }
+          }
+        }
+      },
+      "playerResponse": {
+        "content": {
+          "application/x-www-form-urlencoded": {
+            "schema": {
+              "$ref": "#/components/schemas/playerResponse"
+            }
+          }
+        }
+      },
+      "playerGetAllResponse": {
+        "content": {
+          "application/x-www-form-urlencoded": {
+            "schema": {
+              "$ref": "#/components/schemas/playerGetAllResponse"
             }
           }
         }
@@ -352,6 +540,52 @@
           "__v": {
             "type": "integer"
           }
+        }
+      },
+      "playerRequest": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "age": {
+            "type": "integer"
+          },
+          "position": {
+            "type": "string"
+          }
+        }
+      },
+      "playerResponse": {
+        "type": "object",
+        "properties": {
+          "age": {
+            "type": "integer"
+          },
+          "_id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "position": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "string"
+          },
+          "updatedAt": {
+            "type": "string"
+          },
+          "__v": {
+            "type": "integer"
+          }
+        }
+      },
+      "playerGetAllResponse": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/playerResponse"
         }
       }
     }
