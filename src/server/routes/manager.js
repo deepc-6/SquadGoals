@@ -91,7 +91,9 @@ router.patch('/manager/:id', authenticate, async (req, res) => {
     }
 
     updates.forEach((update) => {
-      user[update] = req.body[update];
+      if (req.body[update]) {
+        user[update] = req.body[update];
+      }
     });
     await user.save();
 

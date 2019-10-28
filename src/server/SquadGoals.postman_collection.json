@@ -1,0 +1,466 @@
+{
+	"info": {
+		"_postman_id": "9f2957f0-d023-4c0f-90bb-cc156dbbc6c0",
+		"name": "SquadGoals",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "manager",
+			"item": [
+				{
+					"name": "localhost:3000/manager",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"manager1\",\n\t\"email\": \"manager1@example.com\",\n\t\"password\": \"manager1Password\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/manager",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"manager"
+							]
+						},
+						"description": "Create a new manager"
+					},
+					"response": []
+				},
+				{
+					"name": "localhost:3000/manager/login",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"manager1@example.com\",\n\t\"password\": \"manager1Password\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/manager/login",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"manager",
+								"login"
+							]
+						},
+						"description": "Login as manager"
+					},
+					"response": []
+				},
+				{
+					"name": "localhost:3000/manager/5db6392c95294826eaf004f8",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZGI2MzkyYzk1Mjk0ODI2ZWFmMDA0ZjgiLCJpYXQiOjE1NzIyMjMzNjUsImV4cCI6MTU3MjgyODE2NX0.xfxDuJNSKSrA2NiM7rnTtigdDTZxC6hhonm09wf8Eb8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:3000/manager/5db6392c95294826eaf004f8",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"manager",
+								"5db6392c95294826eaf004f8"
+							]
+						},
+						"description": "Retrieve manager details"
+					},
+					"response": []
+				},
+				{
+					"name": "localhost:3000/manager/5db6392c95294826eaf004f8",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZGI2MzkyYzk1Mjk0ODI2ZWFmMDA0ZjgiLCJpYXQiOjE1NzIyMjMzNjUsImV4cCI6MTU3MjgyODE2NX0.xfxDuJNSKSrA2NiM7rnTtigdDTZxC6hhonm09wf8Eb8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"manager2\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/manager/5db6392c95294826eaf004f8",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"manager",
+								"5db6392c95294826eaf004f8"
+							]
+						},
+						"description": "Update manager details"
+					},
+					"response": []
+				},
+				{
+					"name": "localhost:3000/manager/logout",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZGI2MzkyYzk1Mjk0ODI2ZWFmMDA0ZjgiLCJpYXQiOjE1NzIyMjMzNjUsImV4cCI6MTU3MjgyODE2NX0.xfxDuJNSKSrA2NiM7rnTtigdDTZxC6hhonm09wf8Eb8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:3000/manager/logout",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"manager",
+								"logout"
+							]
+						},
+						"description": "Logout as manager"
+					},
+					"response": []
+				},
+				{
+					"name": "localhost:3000/manager/5db6392c95294826eaf004f8",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZGI2MzkyYzk1Mjk0ODI2ZWFmMDA0ZjgiLCJpYXQiOjE1NzIyMjM2MzMsImV4cCI6MTU3MjgyODQzM30.T4Ui-jNo6YCqfNsMIk9aKOw0IwLXdHXlhAfeySE7b4g",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"manager1@example.com\",\n\t\"password\": \"manager1Password\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/manager/5db6392c95294826eaf004f8",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"manager",
+								"5db6392c95294826eaf004f8"
+							]
+						},
+						"description": "Delete manager account"
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "players",
+			"item": [
+				{
+					"name": "localhost:3000/players",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZGI2M2FlNzE4MWQ5MTI3MDRmMWExNDAiLCJpYXQiOjE1NzIyMjM3MjAsImV4cCI6MTU3MjgyODUyMH0.s7pEWZ73hJ1v8d4iP2JmvSNLC13m_9AUoS0cXfmukgQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"player1\",\n\t\"age\": \"20\",\n\t\"position\": \"LB\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/players",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"players"
+							]
+						},
+						"description": "Create a new player"
+					},
+					"response": []
+				},
+				{
+					"name": "localhost:3000/players",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZGI2M2FlNzE4MWQ5MTI3MDRmMWExNDAiLCJpYXQiOjE1NzIyMjM3MjAsImV4cCI6MTU3MjgyODUyMH0.s7pEWZ73hJ1v8d4iP2JmvSNLC13m_9AUoS0cXfmukgQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:3000/players",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"players"
+							]
+						},
+						"description": "Get all players"
+					},
+					"response": []
+				},
+				{
+					"name": "localhost:3000/players/5db63b18181d912704f1a142",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZGI2M2FlNzE4MWQ5MTI3MDRmMWExNDAiLCJpYXQiOjE1NzIyMjM3MjAsImV4cCI6MTU3MjgyODUyMH0.s7pEWZ73hJ1v8d4iP2JmvSNLC13m_9AUoS0cXfmukgQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:3000/players/5db63b18181d912704f1a142",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"players",
+								"5db63b18181d912704f1a142"
+							]
+						},
+						"description": "Get one player"
+					},
+					"response": []
+				},
+				{
+					"name": "localhost:3000/players/5db63b18181d912704f1a142",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZGI2M2FlNzE4MWQ5MTI3MDRmMWExNDAiLCJpYXQiOjE1NzIyMjM3MjAsImV4cCI6MTU3MjgyODUyMH0.s7pEWZ73hJ1v8d4iP2JmvSNLC13m_9AUoS0cXfmukgQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"age\": 22\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/players/5db63b18181d912704f1a142",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"players",
+								"5db63b18181d912704f1a142"
+							]
+						},
+						"description": "Update a player"
+					},
+					"response": []
+				},
+				{
+					"name": "localhost:3000/players/5db63b18181d912704f1a142",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZGI2M2FlNzE4MWQ5MTI3MDRmMWExNDAiLCJpYXQiOjE1NzIyMjM3MjAsImV4cCI6MTU3MjgyODUyMH0.s7pEWZ73hJ1v8d4iP2JmvSNLC13m_9AUoS0cXfmukgQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:3000/players/5db63b18181d912704f1a142",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"players",
+								"5db63b18181d912704f1a142"
+							]
+						},
+						"description": "Delete a player"
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
