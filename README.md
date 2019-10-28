@@ -28,6 +28,11 @@ Copy the .env file sent to you by e-mail inside the src/server directory.
 yarn dev
 ```
 
+## Testing API endpoints
+```
+http://localhost:3000/api-docs/
+```
+
 ## Tests
 ### Running test cases
 ```
