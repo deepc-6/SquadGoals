@@ -56,7 +56,7 @@ describe('Player Routes Test', () => {
   // should not be able to access restricted data without authorization token
   it('should not allow unauthenticated requests', async (done) => {
     await request(app)
-      .get('/players')
+      .get(`/players/${_id}`)
       .then((response) => {
         expect(response.statusCode).toBe(401);
         expect(response.error).toBeDefined();
@@ -67,7 +67,7 @@ describe('Player Routes Test', () => {
   // should not be able to access player data while logged out
   it('should not be able to get players while logged out', async (done) => {
     await request(app)
-      .get('/players')
+      .get(`/players/${_id}`)
       .set('Authorization', `Bearer ${token}`)
       .then((response) => {
         expect(response.statusCode).toBe(401);
@@ -93,13 +93,14 @@ describe('Player Routes Test', () => {
   });
 
   // create a new player
-  it('should create new players', async (done) => {
+  it('should create a new player', async (done) => {
     await request(app)
       .post('/players')
       .send({
         name: 'player3',
         age: 21,
         position: 'LB',
+        managerId: _id,
       })
       .set('Authorization', `Bearer ${token}`)
       .then((response) => {
@@ -112,7 +113,7 @@ describe('Player Routes Test', () => {
   // should be able to view all players
   it('should get all players', async (done) => {
     await request(app)
-      .get('/players')
+      .get(`/players/${_id}`)
       .set('Authorization', `Bearer ${token}`)
       .then((response) => expect(response.statusCode).toBe(200));
     done();
@@ -121,7 +122,7 @@ describe('Player Routes Test', () => {
   // should be able to access specific player data based on id sent
   it('should get player details', async (done) => {
     await request(app)
-      .get(`/players/${playerId}`)
+      .get(`/players/${_id}/${playerId}`)
       .set('Authorization', `Bearer ${token}`)
       .then((response) => expect(response.statusCode).toBe(200));
     done();
@@ -130,7 +131,7 @@ describe('Player Routes Test', () => {
   // should be able to update specific player data
   it('should update player details', async (done) => {
     await request(app)
-      .patch(`/players/${playerId}`)
+      .patch(`/players/${_id}/${playerId}`)
       .set('Authorization', `Bearer ${token}`)
       .send({
         age: 22,
@@ -142,7 +143,7 @@ describe('Player Routes Test', () => {
   // should be able to delete specific player data
   it('should delete player', async (done) => {
     await request(app)
-      .delete(`/players/${playerId}`)
+      .delete(`/players/${_id}/${playerId}`)
       .set('Authorization', `Bearer ${token}`)
       .then((response) => expect(response.statusCode).toBe(200));
     done();

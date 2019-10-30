@@ -20,6 +20,7 @@ describe('Player Model Test', () => {
       name: 'player1',
       age: 20,
       position: 'LB',
+      managerId: '5db63ae7181d912704f1a140',
     };
     const validUser = new Player(userData);
     const savedUser = await validUser.save();
@@ -35,6 +36,7 @@ describe('Player Model Test', () => {
       name: 'player2',
       age: 20,
       position: 'LB',
+      managerId: '5db993a544fc9f08af394fbe',
       gender: 'M',
     });
     const savedUserWithInvalidField = await userWithInvalidField.save();

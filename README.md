@@ -30,7 +30,7 @@ yarn dev
 
 ## Testing API endpoints
 ```
-http://localhost:3000/api-docs/
+http://localhost:8080/api-docs/
 ```
 
 ## Tests

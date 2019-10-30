@@ -212,7 +212,20 @@
             "description": "Conflict"
           }
         }
-      },
+      }
+    },
+    "/players/{managerId}": {
+      "parameters": [
+        {
+          "name": "managerId",
+          "in": "path",
+          "required": true,
+          "description": "id of the manager linked to the players",
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
       "get": {
         "security": [
           {
@@ -220,8 +233,8 @@
           }
         ],
         "tags": ["players"],
-        "summary": "Get all players",
-        "description": "Returns all players",
+        "summary": "Get all players linked to the manager",
+        "description": "Returns all players linked to the manager",
         "responses": {
           "200": {
             "description": "Get success",
@@ -235,12 +248,24 @@
           },
           "400": {
             "description": "Bad request"
+          },
+          "404": {
+            "description": "Not found"
           }
         }
       }
     },
-    "/players/{id}": {
+    "/players/{managerId}/{id}": {
       "parameters": [
+        {
+          "name": "managerId",
+          "in": "path",
+          "required": true,
+          "description": "id of the manager linked to the player",
+          "schema": {
+            "type": "string"
+          }
+        },
         {
           "name": "id",
           "in": "path",
@@ -259,7 +284,7 @@
         ],
         "tags": ["players"],
         "summary": "Get one player",
-        "description": "Returns the player with the given id",
+        "description": "Returns the player with the given id and managerId",
         "responses": {
           "200": {
             "description": "Get success",
@@ -287,9 +312,9 @@
         ],
         "tags": ["players"],
         "summary": "Updates a player",
-        "description": "Updates the player with the given id",
+        "description": "Updates the player with the given id and managerId",
         "requestBody": {
-          "$ref": "#/components/requestBodies/playerRequest"
+          "$ref": "#/components/requestBodies/playerPatchRequest"
         },
         "responses": {
           "200": {
@@ -318,7 +343,7 @@
         ],
         "tags": ["players"],
         "summary": "Delete a player",
-        "description": "Deletes the player with the given id",
+        "description": "Deletes the player with the given id and managerId",
         "responses": {
           "200": {
             "description": "Player deletion success"
@@ -335,7 +360,7 @@
   },
   "servers": [
     {
-      "url": "http://localhost:3000/"
+      "url": "http://localhost:8080/"
     }
   ],
   "components": {
@@ -415,6 +440,15 @@
           "application/x-www-form-urlencoded": {
             "schema": {
               "$ref": "#/components/schemas/playerResponse"
+            }
+          }
+        }
+      },
+      "playerPatchRequest": {
+        "content": {
+          "application/x-www-form-urlencoded": {
+            "schema": {
+              "$ref": "#/components/schemas/playerPatchRequest"
             }
           }
         }
@@ -553,6 +587,9 @@
           },
           "position": {
             "type": "string"
+          },
+          "managerId": {
+            "type": "string"
           }
         }
       },
@@ -571,6 +608,9 @@
           "position": {
             "type": "string"
           },
+          "managerId": {
+            "type": "string"
+          },
           "createdAt": {
             "type": "string"
           },
@@ -579,6 +619,20 @@
           },
           "__v": {
             "type": "integer"
+          }
+        }
+      },
+      "playerPatchRequest": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "age": {
+            "type": "integer"
+          },
+          "position": {
+            "type": "string"
           }
         }
       },

@@ -23,6 +23,11 @@ const PlayerSchema = new mongoose.Schema(
       required: true,
       trim: true,
     },
+    managerId: {
+      type: String,
+      required: true,
+      trim: true,
+    },
   },
   {
     timestamps: true,

@@ -17,9 +17,10 @@ router.post('/players', authenticate, async (req, res) => {
 });
 
 // get all players
-router.get('/players', authenticate, async (req, res) => {
+router.get('/players/:managerId', authenticate, async (req, res) => {
+  const { managerId } = req.params;
   try {
-    const players = await Player.find({});
+    const players = await Player.find({ managerId });
     res.send(players);
   } catch (error) {
     res.status(500).send();
@@ -27,13 +28,14 @@ router.get('/players', authenticate, async (req, res) => {
 });
 
 // get one player
-router.get('/players/:id', authenticate, async (req, res) => {
+router.get('/players/:managerId/:id', authenticate, async (req, res) => {
   const _id = req.params.id;
-  if (!ObjectID.isValid(_id)) {
+  const { managerId } = req.params;
+  if (!ObjectID.isValid(_id) || !ObjectID.isValid(managerId)) {
     return res.status(404).send();
   }
   try {
-    const player = await Player.findOne({ _id });
+    const player = await Player.findOne({ _id, managerId });
     if (!player) {
       return res.status(404).send();
     }
@@ -44,8 +46,9 @@ router.get('/players/:id', authenticate, async (req, res) => {
 });
 
 // update a player
-router.patch('/players/:id', authenticate, async (req, res) => {
+router.patch('/players/:managerId/:id', authenticate, async (req, res) => {
   const _id = req.params.id;
+  const { managerId } = req.params;
   const updates = Object.keys(req.body);
   const allowedUpdates = ['name', 'age', 'position'];
   const isValidOperation = updates.every((update) =>
@@ -54,13 +57,11 @@ router.patch('/players/:id', authenticate, async (req, res) => {
   if (!isValidOperation) {
     res.status(400).send({ error: 'Invalid updates' });
   }
-  if (!ObjectID.isValid(_id)) {
+  if (!ObjectID.isValid(_id) || !ObjectID.isValid(managerId)) {
     res.status(404).send();
   }
   try {
-    const player = await Player.findOne({
-      _id: req.params.id,
-    });
+    const player = await Player.findOne({ _id, managerId });
 
     if (!player) {
       res.status(404).send();
@@ -80,13 +81,14 @@ router.patch('/players/:id', authenticate, async (req, res) => {
 });
 
 // delete a player
-router.delete('/players/:id', authenticate, async (req, res) => {
+router.delete('/players/:managerId/:id', authenticate, async (req, res) => {
   const _id = req.params.id;
-  if (!ObjectID.isValid(_id)) {
+  const managerId = req.params.managerId;
+  if (!ObjectID.isValid(_id) || !ObjectID.isValid(managerId)) {
     return res.status(404).send();
   }
   try {
-    const deletePlayer = await Player.findOneAndDelete({ _id });
+    const deletePlayer = await Player.findOneAndDelete({ _id, managerId });
     if (!deletePlayer) {
       return res.status(404).send();
     }
