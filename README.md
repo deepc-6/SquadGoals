@@ -23,7 +23,6 @@ yarn
 Copy the .env file sent to you by e-mail inside the src/server directory.
 
 ## How to run
-### Running API server locally
 ```
 yarn start
 ```
