@@ -1,0 +1,15 @@
+{
+  "name": "squad-goals",
+  "version": "1.0.0",
+  "dependencies": {
+    "concurrently": "^5.0.0"
+  },
+  "scripts": {
+    "installClient": "cd src/client && yarn",
+    "installServer": "cd src/server && yarn",
+    "install": "yarn installClient && yarn installServer",
+    "client": "cd src/client && yarn start",
+    "server": "cd src/server && yarn dev",
+    "start": "concurrently \"yarn client\" \"yarn server\""
+  }
+}

@@ -73,7 +73,6 @@ router.patch('/players/:managerId/:id', authenticate, async (req, res) => {
       }
     });
     await player.save();
-
     res.send(player);
   } catch (error) {
     res.status(400).send();
@@ -83,7 +82,7 @@ router.patch('/players/:managerId/:id', authenticate, async (req, res) => {
 // delete a player
 router.delete('/players/:managerId/:id', authenticate, async (req, res) => {
   const _id = req.params.id;
-  const managerId = req.params.managerId;
+  const { managerId } = req.params;
   if (!ObjectID.isValid(_id) || !ObjectID.isValid(managerId)) {
     return res.status(404).send();
   }

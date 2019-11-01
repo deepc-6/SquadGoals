@@ -1,4 +1,24 @@
-.vscode
+# dependencies
+src/client/node_modules
 src/server/node_modules
-src/server/yarn.lock
+node_modules
+
+# misc
+.vscode
+.DS_Store
 src/server/.env
+yarn.lock
+package-lock.json
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+src/client/yarn.lock
+src/client/package-lock.json
+src/client/npm-debug.log*
+src/client/yarn-debug.log*
+src/client/yarn-error.log*
+src/server/yarn.lock
+src/server/package-lock.json
+src/server/npm-debug.log*
+src/server/yarn-debug.log*
+src/server/yarn-error.log*

@@ -28,7 +28,7 @@ router.post('/manager/login', async (req, res) => {
       req.body.password,
     );
     const token = await user.newAuthToken();
-    res.send({ _id: user._id, token });
+    res.send({ user, token });
   } catch (error) {
     res.status(400).send();
   }
