@@ -16,7 +16,7 @@ git clone https://github.com/deepc-6/SquadGoals.git
 2. Uncompress to your desired directory.
 ### Install dependencies after installing (Git or manual download)
 ```
-cd SquadGoals/src/server
+cd SquadGoals/
 yarn
 ```
 ### Setting up environments
@@ -25,7 +25,7 @@ Copy the .env file sent to you by e-mail inside the src/server directory.
 ## How to run
 ### Running API server locally
 ```
-yarn dev
+yarn start
 ```
 
 ## Testing API endpoints
@@ -34,14 +34,16 @@ http://localhost:8080/api-docs/
 ```
 
 ## Tests
-### Running test cases
+### Running test cases on back end
 ```
+cd src/server
 yarn test
 ```
 
 ## ESLint
-### Running Eslint
+### Running Eslint on back end
 ```
+cd src/server
 yarn eslint .
 ```
 
